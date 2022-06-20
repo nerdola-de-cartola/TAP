@@ -3,8 +3,23 @@ using namespace std;
 
 vector<int> heights;
 
+long long int biggestJump(void) {
+    long long int biggest_jump = heights[1] - heights[0], jump;
+
+    for(int i = 2; i < heights.size(); i++) {
+        jump = heights[i] - heights[i-1]; 
+        if(jump > biggest_jump) biggest_jump = jump;    
+    }
+
+    for(int i = 0; i < heights.size(); i++) {
+        if(heights[i] == biggest_jump);
+    }
+
+    return biggest_jump;
+}
+
 void tryClimb(int ladder, int test) {
-    long long int force = 1;
+    long long int force = biggestJump();
     
     while(true) {
         bool finish = false;
