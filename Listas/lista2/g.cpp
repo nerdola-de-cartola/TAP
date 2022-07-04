@@ -16,16 +16,41 @@ int main(void) {
         cin >> max_op;
         cin >> str;
 
-        for(int i = 0; i < str.size() - 1; i++) {
-            tmp.insert(0, 1, str[i]);
-            tmp.insert(1, 1, str[i + 1]);
-            matrix_digits.push_back(tmp);
-            tmp.clear();
+        if(str[str_size-1] == '0') {
+            int u1;
+            for(int i = str_size-1; i >= 0 ; i--) {
+                if(str[i] == '1') {
+                    u1 = i;
+                    break;
+                }
+            }
+
+            if(max_op >= str_size - u1) {
+                str[str_size - 1] = '1';
+                str[u1] = '0';
+                max_op -= str_size - u1;
+            }
         }
 
-        sum = 0;
-        for(int i = 0; i < matrix_digits.size(); i++) {
-            sum += stoi(matrix_digits[i]);
+        if(str[0] == '0') {
+            int p1;
+            for(int i = 0; i < str_size; i++) {
+                if(str[i] == '1') {
+                    p1 = i;
+                    break;
+                }
+            }
+
+            if(max_op >= p1) {
+                str[0] = '1';
+                str[p1] = '0';
+                max_op -= p1;
+            }
+        }
+
+        int sum = 0;
+        for(int i = 0; i < str_size-1; i++) {
+            sum += ((str[i]-'0')*10) + (str[i+1]-'0');
         }
 
         cout << sum << '\n';
